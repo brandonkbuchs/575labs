@@ -1,5 +1,5 @@
 # GEOG575
 
-## Interactive Cartography and Geovisualization
+ Interactive Cartography and Geovisualization
 
-## University of Wisconsin-Madison | Summer 2019
+ University of Wisconsin-Madison | Summer 2019
