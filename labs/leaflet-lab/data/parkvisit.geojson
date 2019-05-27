@@ -253,7 +253,7 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 33.9961, -119.7692 ]
+       "coordinates":  [ -119.7692, 33.9961 ]
     },
     "properties": {
     "Park Name":"Channel Islands NP",
