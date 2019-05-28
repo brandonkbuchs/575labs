@@ -51,7 +51,7 @@ function createPropSymbols(data, map) {
 function createMap() {
     var map = L.map('map', {
     center: [39, -100],
-    zoom: 2
+    zoom: 4
     });
 
     //Add the base tileLayer to the map.
