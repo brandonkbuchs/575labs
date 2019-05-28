@@ -1,34 +1,82 @@
+/* Brandon Buchs
+GEOG 575 - Interactive Cartography and Geovisuzalization
+Lab1 - Leaflet Lab
+main.js
+27 May 2019*/
 
-var map = L.map('map').setView([33.502, -82.206], 15); //Build the map with the center point and starting zoom
+//Determine symbol radius
+function calcPropRadius(attValue) {
+    var scaleFactor = 0.03;
+    var area = attValue * scaleFactor;
+    var radius = Math.sqrt(area/Math.PI);
 
+    return radius;
+}
 
-var basemap = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-    attribution: 'Map data provided through mapbox.com',
-    id: 'mapbox.satellite',
-    accessToken: 'pk.eyJ1IjoiYnJhbmRvbmtidWNocyIsImEiOiJjamNiOWN5Z2EwMDF2MnF1ajh3NHNwZmN3In0.ZpBtYtaL-UhFvXEHn3vUWA',
-    maxZoom: 22,
-    minZoom: 10
-}); //Add the basemap or first tileLayer to the map. Needs attribution, ID and accesstoken.
+//Create markers
 
-basemap.addTo(map); //Actually add to map
+function createMarkers(feature, latlng) {
+    var attribute = '2001';
+    //Create the Marker Options
+    var markerOptions = {
+    fillColor: '#6D3332',
+    color: '#281313',
+    opacity: 1,
+    fillOpacity: 0.7,
+    weight: 1
+    };
 
+    var attValue = Number(feature.properties[attribute]);
 
-var marker = L.marker([33.479705, -82.22974]).addTo(map); //Add a marker to the map
+    markerOptions.radius = calcPropRadius(attValue);
 
-marker.bindPopup('<b>I am located in Columbia County!</b>'); //add a popup to the marker
+    var layer = L.circleMarker(latlng, markerOptions);
 
+    var popupContent = '<p><b> Park Name: </b>' + feature.properties.Name + ' <br><b> Visitors in ' + attribute + ':</b>' + attValue + '</b></p>';
 
-var polygon = L.polygon([
-    [33.550238, -82.216991],
-    [33.549487, -82.217163],
-    [33.54963, -82.215554],
-    [33.550632, -82.214888]
-]).addTo(map); //Polygon added to map
+    layer.bindPopup(popupContent);
 
-polygon.bindPopup('<b>Redeemer Presbyterian Church</b>'); //Popup for the polygon
+    return layer;
+}
+//Creating proportional symbols
+function createPropSymbols(data, map) {
+    
+    //Plot marker options on map
+    L.geoJson(data, {
+        pointToLayer: createMarkers
+    }).addTo(map);
+};
 
-var circle = L.circle([33.50050, -82.19854], 500, {
-    color: 'green',
-    fillColor: 'gray',
-    fillOpacity: 0.48
-}).addTo(map); //circle added to the map
+//Instantiate leaflet map
+function createMap() {
+    var map = L.map('map', {
+    center: [39, -100],
+    zoom: 2
+    });
+
+    //Add the base tileLayer to the map.
+    var basemap = L.tileLayer('https://api.mapbox.com/styles/v1/{username}/{style}/tiles/256/{z}/{x}/{y}@2x?access_token={accessToken}', {
+        attribution: 'Map data provided through mapbox.com',
+        username: 'brandonkbuchs',
+        style: 'cjw7397uz0kme1cl5ezmdp08y',
+        accessToken: 'pk.eyJ1IjoiYnJhbmRvbmtidWNocyIsImEiOiJjamNiOWN5Z2EwMDF2MnF1ajh3NHNwZmN3In0.ZpBtYtaL-UhFvXEHn3vUWA',
+        maxZoom: 22,
+        minZoom: 2
+    }).addTo(map);
+
+    //call getData function
+    getData(map);
+};
+
+//Function to retrieve data and put it on the map
+function getData(map) {
+    $.ajax('data/parkvisit.geojson', {
+        dataType: 'json',
+        success: function(response) {
+            //call function createPropSymbols
+            createPropSymbols(response, map);
+        }
+    });
+};
+
+$(document).ready(createMap);

@@ -8,7 +8,7 @@
        "coordinates":  [ -68.062951,44.34447 ]
     },
     "properties": {
-    "Park Name":"Acadia NP",
+    "Name":"Acadia NP",
     "1999":0,
     "2000":0,
     "2001":0,
@@ -39,7 +39,7 @@
        "coordinates":  [ -109.6161575,38.6165504 ]
     },
     "properties": {
-    "Park Name":"Arches NP",
+    "Name":"Arches NP",
     "1999":817,
     "2000":643,
     "2001":414,
@@ -70,7 +70,7 @@
        "coordinates":  [ -102.360981,43.817928 ]
     },
     "properties": {
-    "Park Name":"Badlands NP",
+    "Name":"Badlands NP",
     "1999":911,
     "2000":859,
     "2001":692,
@@ -101,7 +101,7 @@
        "coordinates":  [ -103.250452,29.250201 ]
     },
     "properties": {
-    "Park Name":"Big Bend NP",
+    "Name":"Big Bend NP",
     "1999":40059,
     "2000":32675,
     "2001":28826,
@@ -132,7 +132,7 @@
        "coordinates":  [ -107.7203445,38.5691986 ]
     },
     "properties": {
-    "Park Name":"Black Canyon of the Gunnison NP",
+    "Name":"Black Canyon of the Gunnison NP",
     "1999":1597,
     "2000":2456,
     "2001":1729,
@@ -163,7 +163,7 @@
        "coordinates":  [ -109.984017,38.166652 ]
     },
     "properties": {
-    "Park Name":"Canyonlands NP",
+    "Name":"Canyonlands NP",
     "1999":72148,
     "2000":71411,
     "2001":70745,
@@ -194,7 +194,7 @@
        "coordinates":  [ -111.2613297,38.291481 ]
     },
     "properties": {
-    "Park Name":"Capitol Reef NP",
+    "Name":"Capitol Reef NP",
     "1999":2272,
     "2000":2735,
     "2001":1721,
@@ -225,7 +225,7 @@
        "coordinates":  [ -104.4443207,32.1750298 ]
     },
     "properties": {
-    "Park Name":"Carlsbad Caverns NP",
+    "Name":"Carlsbad Caverns NP",
     "1999":257,
     "2000":140,
     "2001":157,
@@ -256,7 +256,7 @@
        "coordinates":  [ -119.7692, 33.9961 ]
     },
     "properties": {
-    "Park Name":"Channel Islands NP",
+    "Name":"Channel Islands NP",
     "1999":9459,
     "2000":10227,
     "2001":10326,
@@ -287,7 +287,7 @@
        "coordinates":  [ -80.82341,33.8296242 ]
     },
     "properties": {
-    "Park Name":"Congaree NP",
+    "Name":"Congaree NP",
     "1999":288,
     "2000":631,
     "2001":454,
@@ -318,7 +318,7 @@
        "coordinates":  [ -122.1328812,42.9411163 ]
     },
     "properties": {
-    "Park Name":"Crater Lake NP",
+    "Name":"Crater Lake NP",
     "1999":1258,
     "2000":1482,
     "2001":2009,
@@ -349,7 +349,7 @@
        "coordinates":  [ -151.0046082,63.0695343 ]
     },
     "properties": {
-    "Park Name":"Denali NP & PRES",
+    "Name":"Denali NP & PRES",
     "1999":36026,
     "2000":32579,
     "2001":35301,
@@ -380,7 +380,7 @@
        "coordinates":  [ -80.937293,25.312897 ]
     },
     "properties": {
-    "Park Name":"Everglades NP",
+    "Name":"Everglades NP",
     "1999":20237,
     "2000":19868,
     "2001":23411,
@@ -411,7 +411,7 @@
        "coordinates":  [ -153.3029022,67.7404099 ]
     },
     "properties": {
-    "Park Name":"Gates of the Arctic NP & PRES",
+    "Name":"Gates of the Arctic NP & PRES",
     "1999":6282,
     "2000":0,
     "2001":1366,
@@ -442,7 +442,7 @@
        "coordinates":  [ -136.2265167,58.6771164 ]
     },
     "properties": {
-    "Park Name":"Glacier Bay NP & PRES",
+    "Name":"Glacier Bay NP & PRES",
     "1999":7149,
     "2000":6568,
     "2001":7504,
@@ -473,7 +473,7 @@
        "coordinates":  [ -113.719841,48.6970482 ]
     },
     "properties": {
-    "Park Name":"Glacier NP",
+    "Name":"Glacier NP",
     "1999":26209,
     "2000":25010,
     "2001":28915,
@@ -504,7 +504,7 @@
        "coordinates":  [ -112.139614,36.055539 ]
     },
     "properties": {
-    "Park Name":"Grand Canyon NP",
+    "Name":"Grand Canyon NP",
     "1999":154478,
     "2000":181998,
     "2001":250876,
@@ -535,7 +535,7 @@
        "coordinates":  [ -110.700767,43.833269 ]
     },
     "properties": {
-    "Park Name":"Grand Teton NP",
+    "Name":"Grand Teton NP",
     "1999":32169,
     "2000":32332,
     "2001":32700,
@@ -566,7 +566,7 @@
        "coordinates":  [ -114.186903,38.915135 ]
     },
     "properties": {
-    "Park Name":"Great Basin NP",
+    "Name":"Great Basin NP",
     "1999":265,
     "2000":294,
     "2001":211,
@@ -597,7 +597,7 @@
        "coordinates":  [ -105.5206757,37.7231598 ]
     },
     "properties": {
-    "Park Name":"Great Sand Dunes NP & PRES",
+    "Name":"Great Sand Dunes NP & PRES",
     "1999":1404,
     "2000":1367,
     "2001":1982,
@@ -628,7 +628,7 @@
        "coordinates":  [ -83.5372849,35.6882591 ]
     },
     "properties": {
-    "Park Name":"Great Smoky Mountains NP",
+    "Name":"Great Smoky Mountains NP",
     "1999":92994,
     "2000":80654,
     "2001":76919,
@@ -656,10 +656,10 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -100.445882,39.78373 ]
+       "coordinates":  [ -104.8725,31.9452 ]
     },
     "properties": {
-    "Park Name":"Guadalupe Mountains NP",
+    "Name":"Guadalupe Mountains NP",
     "1999":3399,
     "2000":3085,
     "2001":2853,
@@ -690,7 +690,7 @@
        "coordinates":  [ -156.256546,20.7127342 ]
     },
     "properties": {
-    "Park Name":"Haleakala NP",
+    "Name":"Haleakala NP",
     "1999":2317,
     "2000":2309,
     "2001":2705,
@@ -721,7 +721,7 @@
        "coordinates":  [ -155.2532196,19.4289303 ]
     },
     "properties": {
-    "Park Name":"Hawaii Volcanoes NP",
+    "Name":"Hawaii Volcanoes NP",
     "1999":4527,
     "2000":3764,
     "2001":3715,
@@ -752,7 +752,7 @@
        "coordinates":  [ -88.841105,48.002063 ]
     },
     "properties": {
-    "Park Name":"Isle Royale NP",
+    "Name":"Isle Royale NP",
     "1999":44028,
     "2000":40157,
     "2001":49077,
@@ -783,7 +783,7 @@
        "coordinates":  [ -115.917497,33.916676 ]
     },
     "properties": {
-    "Park Name":"Joshua Tree NP",
+    "Name":"Joshua Tree NP",
     "1999":6383,
     "2000":7379,
     "2001":5868,
@@ -814,7 +814,7 @@
        "coordinates":  [ -155.0220642,58.6223526 ]
     },
     "properties": {
-    "Park Name":"Katmai NP & PRES",
+    "Name":"Katmai NP & PRES",
     "1999":12952,
     "2000":21231,
     "2001":20903,
@@ -845,7 +845,7 @@
        "coordinates":  [ -149.6264343,60.1894302 ]
     },
     "properties": {
-    "Park Name":"Kenai Fjords NP",
+    "Name":"Kenai Fjords NP",
     "1999":2989,
     "2000":2342,
     "2001":2973,
@@ -876,7 +876,7 @@
        "coordinates":  [ -118.9629517,36.7400589 ]
     },
     "properties": {
-    "Park Name":"Kings Canyon NP",
+    "Name":"Kings Canyon NP",
     "1999":72314,
     "2000":59701,
     "2001":81057,
@@ -907,7 +907,7 @@
        "coordinates":  [ -159.134985,67.362827 ]
     },
     "properties": {
-    "Park Name":"Kobuk Valley NP",
+    "Name":"Kobuk Valley NP",
     "1999":0,
     "2000":0,
     "2001":0,
@@ -938,7 +938,7 @@
        "coordinates":  [ -154.292572,60.2271957 ]
     },
     "properties": {
-    "Park Name":"Lake Clark NP & PRES",
+    "Name":"Lake Clark NP & PRES",
     "1999":2878,
     "2000":2009,
     "2001":2338,
@@ -969,7 +969,7 @@
        "coordinates":  [ -121.5338287,40.4359283 ]
     },
     "properties": {
-    "Park Name":"Lassen Volcanic NP",
+    "Name":"Lassen Volcanic NP",
     "1999":7471,
     "2000":6635,
     "2001":8452,
@@ -1000,7 +1000,7 @@
        "coordinates":  [ -86.0995178,37.1872215 ]
     },
     "properties": {
-    "Park Name":"Mammoth Cave NP",
+    "Name":"Mammoth Cave NP",
     "1999":4329,
     "2000":4879,
     "2001":4981,
@@ -1031,7 +1031,7 @@
        "coordinates":  [ -121.7591476,46.8531036 ]
     },
     "properties": {
-    "Park Name":"Mount Rainier NP",
+    "Name":"Mount Rainier NP",
     "1999":42967,
     "2000":58882,
     "2001":64362,
@@ -1062,7 +1062,7 @@
        "coordinates":  [ -121.2664337,48.6658096 ]
     },
     "properties": {
-    "Park Name":"North Cascades NP",
+    "Name":"North Cascades NP",
     "1999":15460,
     "2000":18575,
     "2001":16243,
@@ -1093,7 +1093,7 @@
        "coordinates":  [ -123.4250336,48.09972 ]
     },
     "properties": {
-    "Park Name":"Olympic NP",
+    "Name":"Olympic NP",
     "1999":118331,
     "2000":115464,
     "2001":107795,
@@ -1124,7 +1124,7 @@
        "coordinates":  [ -109.806506,35.088078 ]
     },
     "properties": {
-    "Park Name":"Petrified Forest NP",
+    "Name":"Petrified Forest NP",
     "1999":464,
     "2000":623,
     "2001":579,
@@ -1155,7 +1155,7 @@
        "coordinates":  [ -124.066641,41.52925 ]
     },
     "properties": {
-    "Park Name":"Redwood NP",
+    "Name":"Redwood NP",
     "1999":1594,
     "2000":1404,
     "2001":1537,
@@ -1186,7 +1186,7 @@
        "coordinates":  [ -105.708895,40.333318 ]
     },
     "properties": {
-    "Park Name":"Rocky Mountain NP",
+    "Name":"Rocky Mountain NP",
     "1999":41417,
     "2000":40528,
     "2001":41285,
@@ -1217,7 +1217,7 @@
        "coordinates":  [ -111.1826,32.278686 ]
     },
     "properties": {
-    "Park Name":"Saguaro NP",
+    "Name":"Saguaro NP",
     "1999":1594,
     "2000":1560,
     "2001":1683,
@@ -1248,7 +1248,7 @@
        "coordinates":  [ -118.563428,36.575495 ]
     },
     "properties": {
-    "Park Name":"Sequoia NP",
+    "Name":"Sequoia NP",
     "1999":76718,
     "2000":65865,
     "2001":88986,
@@ -1279,7 +1279,7 @@
        "coordinates":  [ -78.198082,38.9057503 ]
     },
     "properties": {
-    "Park Name":"Shenandoah NP",
+    "Name":"Shenandoah NP",
     "1999":43913,
     "2000":43489,
     "2001":42563,
@@ -1310,7 +1310,7 @@
        "coordinates":  [ -103.625184,47.238902 ]
     },
     "properties": {
-    "Park Name":"Theodore Roosevelt NP",
+    "Name":"Theodore Roosevelt NP",
     "1999":1465,
     "2000":971,
     "2001":771,
@@ -1341,7 +1341,7 @@
        "coordinates":  [ -93.030433,48.446194 ]
     },
     "properties": {
-    "Park Name":"Voyageurs NP",
+    "Name":"Voyageurs NP",
     "1999":16732,
     "2000":16553,
     "2001":18346,
@@ -1372,7 +1372,7 @@
        "coordinates":  [ -103.4783325,43.5565147 ]
     },
     "properties": {
-    "Park Name":"Wind Cave NP",
+    "Name":"Wind Cave NP",
     "1999":289,
     "2000":245,
     "2001":401,
@@ -1403,7 +1403,7 @@
        "coordinates":  [ -111.0998154,44.6622963 ]
     },
     "properties": {
-    "Park Name":"Yellowstone NP",
+    "Name":"Yellowstone NP",
     "1999":41319,
     "2000":39297,
     "2001":43111,
@@ -1434,7 +1434,7 @@
        "coordinates":  [ -119.516588,37.840548 ]
     },
     "properties": {
-    "Park Name":"Yosemite NP",
+    "Name":"Yosemite NP",
     "1999":87189,
     "2000":106266,
     "2001":100207,
@@ -1465,7 +1465,7 @@
        "coordinates":  [ -112.986795,37.200833 ]
     },
     "properties": {
-    "Park Name":"Zion NP",
+    "Name":"Zion NP",
     "1999":13614,
     "2000":19720,
     "2001":28142,
