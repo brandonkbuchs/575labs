@@ -97,8 +97,8 @@ function createMap() {
 //Create sequence controls
 function createSequenceControls(map, attributes) {
     $('#slider').append('<input class="range-slider" type="range">');
-    $('#slider').append('<button class="skip" id="reverse">R</button>');
-    $('#slider').append('<button class="skip" id="forward">F</button>');
+    $('#slider').append('<button class="skip" id="reverse"><img src="img/reverse.png"></button>');
+    $('#slider').append('<button class="skip" id="forward"><img src="img/forward.png"></button>');
 
     $('.range-slider').attr({
         max: 18,
