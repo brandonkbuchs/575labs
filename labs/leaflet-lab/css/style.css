@@ -8,13 +8,14 @@
 #map {
     top: 20px;
     left: 20px;
-    height: 400px;
     width: 80%;
+    height: 500px;
     display: inline-block;
 }
 
-#panel p {
-    width: 16%;
+#panel {
+    margin-top: 2em;
+    width: 20%;
     padding: 20px;
     display: inline-block;
     vertical-align: top;
@@ -22,4 +23,20 @@
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 1em;
     color: #4C5454;
+}
+
+#forward {
+    float: right;
+}
+
+#reverse {
+    float: left;
+}
+
+#slider {
+    margin-top: 1em;
+    width: 33%;
+    padding: 20px;
+    display: inline-block;
+    vertical-align: top;
 }

@@ -13,10 +13,33 @@ function calcPropRadius(attValue) {
     return radius;
 }
 
-//Create markers
+function createPopup(properties, attribute, layer, radius){
+    var popupContent = '<p><b>Park:</b> ' + properties.Name + '</p>';
+    var year = attribute;
+ 
+    var panelContent = popupContent  + '<p><b> Visitors in ' + year + ':</b> ' + properties[attribute] + '</p>';
 
-function createMarkers(feature, latlng) {
-    var attribute = '2001';
+    layer.bindPopup(popupContent, {
+        offset: new L.Point(0, -radius)
+    });
+
+    //event listeners
+    layer.on({
+        mouseover: function(){
+            this.openPopup();
+        },
+        mouseout: function(){
+            this.closePopup();
+        },
+        click: function(){
+            $('#panel').html(panelContent);
+        }
+    });
+};
+
+//Create markers
+function createMarkers(feature, latlng, attributes) {
+    var attribute = attributes[0];
     //Create the Marker Options
     var markerOptions = {
     fillColor: '#6D3332',
@@ -32,34 +55,19 @@ function createMarkers(feature, latlng) {
 
     var layer = L.circleMarker(latlng, markerOptions);
 
-    var panelContent = '<p><b>Park Name: </b>' + feature.properties.Name + '</p><p><b>Visitors in ' + attribute + ':</b>' + feature.properties[attribute] + '</p>';
-    var popupContent = feature.properties.Name;
-
-    layer.bindPopup(popupContent), {
-        offset: new L.point(0, -markerOptions.radius)
-    };
-
-    //event listeners
-    layer.on({
-        mouseover: function(){
-            this.openPopup();
-        },
-        mouseout: function(){
-            this.closePopup();
-        },
-        click: function(){
-            $('#panel').html(panelContent);
-        }
-    });
-
+    createPopup(feature.properties, attribute, layer, markerOptions.radius);
+    
     return layer;
-}
+};
+
 //Creating proportional symbols
-function createPropSymbols(data, map) {
+function createPropSymbols(data, map, attributes) {
     
     //Plot marker options on map
     L.geoJson(data, {
-        pointToLayer: createMarkers
+        pointToLayer: function(feature, latlng){
+            return createMarkers(feature, latlng, attributes);
+        }
     }).addTo(map);
 };
 
@@ -86,13 +94,85 @@ function createMap() {
     getData(map);
 };
 
+//Create sequence controls
+function createSequenceControls(map, attributes) {
+    $('#slider').append('<input class="range-slider" type="range">');
+    $('#slider').append('<button class="skip" id="reverse">R</button>');
+    $('#slider').append('<button class="skip" id="forward">F</button>');
+
+    $('.range-slider').attr({
+        max: 18,
+        min: 0,
+        value: 0,
+        step: 1
+    });
+
+    $('.skip').click(function(){
+        var index = $('.range-slider').val();
+
+        if ($(this).attr('id') == 'forward') {
+            index ++;
+            index = index > 18 ? 0 : index;
+        } else if ($(this).attr('id') == 'reverse'){
+            index --;
+            index = index < 0 ? 18 : index;
+        };
+
+        $('.range-slider').val(index);
+        updatePropSymbols(map, attributes[index]);
+        
+    });
+
+    $('.range-slider').on('input', function(){
+        var index = $(this).val();
+        updatePropSymbols(map, attributes[index]);
+
+    });
+
+    
+};
+
+//Dyanmically updating proportional symbols
+function updatePropSymbols(map, attribute){
+    map.eachLayer(function(layer){
+        if (layer.feature && layer.feature.properties[attribute]){
+            var props = layer.feature.properties;
+
+            var radius = calcPropRadius(props[attribute]);
+            layer.setRadius(radius);
+
+            createPopup(props, attribute, layer, radius);
+
+        };
+    });
+};
+
+
+//Process attributes into an array
+function processData(data){
+    var attributes = [];
+
+    var properties = data.features[0].properties;
+
+    for (var attribute in properties){
+        if (attribute.indexOf("2") > -1){
+            attributes.push(attribute);
+        };
+    };
+
+    return attributes;
+};
+
 //Function to retrieve data and put it on the map
 function getData(map) {
     $.ajax('data/parkvisit.geojson', {
         dataType: 'json',
         success: function(response) {
             //call function createPropSymbols
-            createPropSymbols(response, map);
+
+            var attributes = processData(response);
+            createPropSymbols(response, map, attributes);
+            createSequenceControls(map, attributes);
         }
     });
 };
