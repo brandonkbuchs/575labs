@@ -1,3 +1,25 @@
+#body p {
+   
+}
 .leaflet-popup-content p {
     margin: 1em 0;
+}
+
+#map {
+    top: 20px;
+    left: 20px;
+    height: 400px;
+    width: 80%;
+    display: inline-block;
+}
+
+#panel p {
+    width: 16%;
+    padding: 20px;
+    display: inline-block;
+    vertical-align: top;
+    
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1em;
+    color: #4C5454;
 }

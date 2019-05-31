@@ -23,7 +23,7 @@ function createMarkers(feature, latlng) {
     color: '#281313',
     opacity: 1,
     fillOpacity: 0.7,
-    weight: 1
+    weight: 1,
     };
 
     var attValue = Number(feature.properties[attribute]);
@@ -32,9 +32,25 @@ function createMarkers(feature, latlng) {
 
     var layer = L.circleMarker(latlng, markerOptions);
 
-    var popupContent = '<p><b> Park Name: </b>' + feature.properties.Name + ' <br><b> Visitors in ' + attribute + ':</b>' + attValue + '</b></p>';
+    var panelContent = '<p><b>Park Name: </b>' + feature.properties.Name + '</p><p><b>Visitors in ' + attribute + ':</b>' + feature.properties[attribute] + '</p>';
+    var popupContent = feature.properties.Name;
 
-    layer.bindPopup(popupContent);
+    layer.bindPopup(popupContent), {
+        offset: new L.point(0, -markerOptions.radius)
+    };
+
+    //event listeners
+    layer.on({
+        mouseover: function(){
+            this.openPopup();
+        },
+        mouseout: function(){
+            this.closePopup();
+        },
+        click: function(){
+            $('#panel').html(panelContent);
+        }
+    });
 
     return layer;
 }
@@ -63,6 +79,8 @@ function createMap() {
         maxZoom: 22,
         minZoom: 2
     }).addTo(map);
+
+    
 
     //call getData function
     getData(map);
