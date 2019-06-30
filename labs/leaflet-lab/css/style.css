@@ -1,28 +1,23 @@
-#body p {
-   
+
+html body {
+    background: #192723 !important;
+}
+h3 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 2.5em;
+    color: #EEDEC8;
 }
 .leaflet-popup-content p {
     margin: 1em 0;
 }
 
 #map {
-    top: 20px;
-    left: 20px;
-    width: 80%;
-    height: 500px;
-    display: inline-block;
-}
-
-#panel {
-    margin-top: 2em;
-    width: 20%;
-    padding: 20px;
-    display: inline-block;
-    vertical-align: top;
-    
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 1em;
-    color: #4C5454;
+    position: auto;
+    height: auto !important;
+    min-height: 700px;
+    width: auto !important;
+    min-width: 700px;
+    padding: 10px;
 }
 
 #forward {
@@ -33,10 +28,13 @@
     float: left;
 }
 
-#slider {
+#symbol-info, #symbol-slider, #range-slider, #panel {
     margin-top: 1em;
-    width: 33%;
     padding: 20px;
     display: inline-block;
     vertical-align: top;
+
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1em;
+    color: #EEDEC8;
 }

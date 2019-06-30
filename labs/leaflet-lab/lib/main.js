@@ -5,40 +5,35 @@ main.js
 27 May 2019*/
 
 //Determine symbol radius
+
+//Proporitional symbol radius
 function calcPropRadius(attValue) {
-    var scaleFactor = 0.03;
+    var scaleFactor = 0.01;
     var area = attValue * scaleFactor;
     var radius = Math.sqrt(area/Math.PI);
 
     return radius;
-}
+};
 
-function createPopup(properties, attribute, layer, radius){
-    var popupContent = '<p><b>Park:</b> ' + properties.Name + '</p>';
+//Creating panel content
+function panelContent(properties, attribute, layer, radius){
+
+    var infoContent = '<p><b>Park:</b> ' + properties.Name + '</p>';
     var year = attribute;
- 
-    var panelContent = popupContent  + '<p><b> Visitors in ' + year + ':</b> ' + properties[attribute] + '</p>';
-
-    layer.bindPopup(popupContent, {
-        offset: new L.Point(0, -radius)
-    });
-
-    //event listeners
+    console.log(attribute);
+     
+    
+    //Event Listeners
     layer.on({
-        mouseover: function(){
-            this.openPopup();
-        },
-        mouseout: function(){
-            this.closePopup();
-        },
-        click: function(){
-            $('#panel').html(panelContent);
+        click: function() {
+            var infoText = infoContent  + '<p><b> Visitors in ' + year + ':</b> ' + properties[attribute] + '</p>';
+            $('#panel').html(infoText);           
         }
     });
 };
 
 //Create markers
-function createMarkers(feature, latlng, attributes) {
+function createMarkers(feature, latlng, attributes, scale) {
     var attribute = attributes[0];
     //Create the Marker Options
     var markerOptions = {
@@ -51,18 +46,20 @@ function createMarkers(feature, latlng, attributes) {
 
     var attValue = Number(feature.properties[attribute]);
 
-    markerOptions.radius = calcPropRadius(attValue);
+    markerOptions.radius = calcPropRadius(attValue, scale);
 
     var layer = L.circleMarker(latlng, markerOptions);
 
-    createPopup(feature.properties, attribute, layer, markerOptions.radius);
-    
+    panelContent(feature.properties, attribute, layer, markerOptions.radius);
+
     return layer;
 };
 
 //Creating proportional symbols
 function createPropSymbols(data, map, attributes) {
-    
+    //Create title text
+    var attribute = attributes[0];
+
     //Plot marker options on map
     L.geoJson(data, {
         pointToLayer: function(feature, latlng){
@@ -74,9 +71,12 @@ function createPropSymbols(data, map, attributes) {
 //Instantiate leaflet map
 function createMap() {
     var map = L.map('map', {
-    center: [39, -100],
-    zoom: 4
+    maxBounds: ([[70.35,-168.56],[18.1,-74.1]]),
+    center: [40, -110],
+    zoom: 3
     });
+
+    
 
     //Add the base tileLayer to the map.
     var basemap = L.tileLayer('https://api.mapbox.com/styles/v1/{username}/{style}/tiles/256/{z}/{x}/{y}@2x?access_token={accessToken}', {
@@ -88,38 +88,77 @@ function createMap() {
         minZoom: 2
     }).addTo(map);
 
-    
-
     //call getData function
     getData(map);
 };
 
 //Create sequence controls
 function createSequenceControls(map, attributes) {
-    $('#slider').append('<input class="range-slider" type="range">');
-    $('#slider').append('<button class="skip" id="reverse"><img src="img/reverse.png"></button>');
-    $('#slider').append('<button class="skip" id="forward"><img src="img/forward.png"></button>');
-
+    var titleText = '<h3 class="title">Recorded National Park Visitors in ' + attributes[0] + '</h3>';
+    $('#map-title').html(titleText);
+    $('#symbol-info').html('<p class="desc">The current symbol scale factor is <b>1</b></p>');
+    $('#range-slider').append('<p class="desc">Year Slider</p>');
+    $('#range-slider').append('<input class="range-slider" type="range">');
+    $('#range-slider').append('<button class="skip" id="reverse"><img src="img/reverse.png"></button>');
+    $('#range-slider').append('<button class="skip" id="forward"><img src="img/forward.png"></button>');
+    //Range slider attributes
     $('.range-slider').attr({
         max: 18,
         min: 0,
-        value: 0,
+        value: 1,
         step: 1
     });
+    //Symbol size slider
+    $('#symbol-slider').append('<p class="desc">Symbol Scale Slider</p>');
+    $('#symbol-slider').append('<input class="symbol-slider" type="range">');
+    $('#symbol-slider').append('<button class="size" id="reverse"><img src="img/reverse.png"></button>');
+    $('#symbol-slider').append('<button class="size" id="forward"><img src="img/forward.png"></button>');
+
+    //Symbol slider attributes
+    $('.symbol-slider').attr({
+        max: 5,
+        min: 1,
+        value: 1,
+        step: 1
+    });
+    
+    $('.size').click(function(){
+        var index = $('.symbol-slider').val();
+        if ($(this).attr('id') == 'forward') {
+            index ++;
+            index = index > 5 ? 1 : index;
+            
+        } else if ($(this).attr('id') == 'reverse'){
+            index --;
+            index = index < 1 ? 5 : index;            
+        };
+
+        $('.symbol-slider').val(index);
+        $('.range-slider').val(0);
+        $('#symbol-info').html('<p class="desc">The current scale modificaiton is <b>' + index + '</b></p>');
+        updatePropSymbols(map, attributes[0], index);
+    });    
 
     $('.skip').click(function(){
+        //Establishing the new title text
         var index = $('.range-slider').val();
+        var scale = $('.symbol-slider').val();
+        $('#panel').html('');
+        titleText = '<h3 class="title">Recorded National Park Visitors in ' + attributes[index] + '</h3>';
+        $('#map-title').html(titleText);        
 
         if ($(this).attr('id') == 'forward') {
             index ++;
             index = index > 18 ? 0 : index;
+            
         } else if ($(this).attr('id') == 'reverse'){
             index --;
             index = index < 0 ? 18 : index;
+            
         };
 
         $('.range-slider').val(index);
-        updatePropSymbols(map, attributes[index]);
+        updatePropSymbols(map, attributes[index], scale);
         
     });
 
@@ -128,20 +167,19 @@ function createSequenceControls(map, attributes) {
         updatePropSymbols(map, attributes[index]);
 
     });
-
     
 };
 
 //Dyanmically updating proportional symbols
-function updatePropSymbols(map, attribute){
+function updatePropSymbols(map, attribute, scale=1){
+
     map.eachLayer(function(layer){
         if (layer.feature && layer.feature.properties[attribute]){
             var props = layer.feature.properties;
-
             var radius = calcPropRadius(props[attribute]);
-            layer.setRadius(radius);
+            layer.setRadius(radius*scale);
 
-            createPopup(props, attribute, layer, radius);
+            panelContent(props, attribute, layer, radius);
 
         };
     });
@@ -173,8 +211,14 @@ function getData(map) {
             var attributes = processData(response);
             createPropSymbols(response, map, attributes);
             createSequenceControls(map, attributes);
+
+            return attributes;
         }
     });
 };
+
+$(window).on('load',function(){
+	$('#myModal').modal('show');
+});
 
 $(document).ready(createMap);
