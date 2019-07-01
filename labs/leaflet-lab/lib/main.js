@@ -19,9 +19,7 @@ function calcPropRadius(attValue) {
 function panelContent(properties, attribute, layer, radius){
 
     var infoContent = '<p><b>Park:</b> ' + properties.Name + '</p>';
-    var year = attribute;
-    console.log(attribute);
-     
+    var year = attribute;    
     
     //Event Listeners
     layer.on({
@@ -96,10 +94,10 @@ function createMap() {
 function createSequenceControls(map, attributes) {
     var titleText = '<h3 class="title">Recorded National Park Visitors in ' + attributes[0] + '</h3>';
     $('#map-title').html(titleText);
-    $('#symbol-info').html('<p class="desc">The current symbol scale factor is <b>1</b></p>');
-    $('#range-slider').append('<p class="desc">Year Slider</p>');
-    $('#range-slider').append('<input class="range-slider" type="range">');
+    $('#symbol-info').html('<p class="desc">Current Symbol Scale Factor: <b>1</b></p>');
+    $('#range-slider').append('<p class="desc">Visited Year (2000-2018)</p>');
     $('#range-slider').append('<button class="skip" id="reverse"><img src="img/reverse.png"></button>');
+    $('#range-slider').append('<input class="range-slider" type="range">');   
     $('#range-slider').append('<button class="skip" id="forward"><img src="img/forward.png"></button>');
     //Range slider attributes
     $('.range-slider').attr({
@@ -109,9 +107,9 @@ function createSequenceControls(map, attributes) {
         step: 1
     });
     //Symbol size slider
-    $('#symbol-slider').append('<p class="desc">Symbol Scale Slider</p>');
-    $('#symbol-slider').append('<input class="symbol-slider" type="range">');
+    $('#symbol-slider').append('<p class="desc">Symbol Size Scale (1-5)</p>');
     $('#symbol-slider').append('<button class="size" id="reverse"><img src="img/reverse.png"></button>');
+    $('#symbol-slider').append('<input class="symbol-slider" type="range">');
     $('#symbol-slider').append('<button class="size" id="forward"><img src="img/forward.png"></button>');
 
     //Symbol slider attributes
@@ -123,6 +121,8 @@ function createSequenceControls(map, attributes) {
     });
     
     $('.size').click(function(){
+        titleText = '<h3 class="title">Recorded National Park Visitors in ' + attributes[0] + '</h3>';
+        $('#map-title').html(titleText);
         var index = $('.symbol-slider').val();
         if ($(this).attr('id') == 'forward') {
             index ++;
@@ -135,7 +135,7 @@ function createSequenceControls(map, attributes) {
 
         $('.symbol-slider').val(index);
         $('.range-slider').val(0);
-        $('#symbol-info').html('<p class="desc">The current scale modificaiton is <b>' + index + '</b></p>');
+        $('#symbol-info').html('<p class="desc">Current Symbol Scale Factor: <b>' + index + '</b></p>');
         updatePropSymbols(map, attributes[0], index);
     });    
 
@@ -207,6 +207,7 @@ function getData(map) {
         dataType: 'json',
         success: function(response) {
             //call function createPropSymbols
+      
 
             var attributes = processData(response);
             createPropSymbols(response, map, attributes);
@@ -217,8 +218,14 @@ function getData(map) {
     });
 };
 
-$(window).on('load',function(){
-	$('#myModal').modal('show');
+$('#closeButton').click(function() {
+    $('#myModal').modal('hide');
 });
 
-$(document).ready(createMap);
+
+
+$(document).ready(function() {
+    $('#myModal').modal('show');
+    createMap();
+    
+});

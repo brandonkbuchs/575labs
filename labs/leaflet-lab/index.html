@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="author" content="Brandon K Buchs">
+        <meta name="description" content="NPS Visitor Statistics Map">
         <script src="lib/jquery-3.4.1.min.js"></script>
+        <script src="lib/bootstrap.min.js"></script>
         <script src="lib/leaflet.js"></script>
         <script src="lib/main.js"></script>
         <link href="css/bootstrap.css" rel="stylesheet">
@@ -11,44 +15,37 @@
     </head>
     <body>
         <!-- Modal -->
-        <div class="modal fade" id="myModal" role="dialog">
-                <div class="modal-dialog">
-            
-                <!-- Modal content-->
+        <div id = "myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"><i class="fa fa-exclamation-circle"></i>&nbsp; //Your modal Title</h4>
-                    </div>
-                    <div class="modal-body">
-                    //Your modal Content
-                    </div>
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                    </div>
+                <div class="modal-header">
+                    <h5 class="modal-title" role="dialog">National Park Visitation Statistics Map | Brandon Buchs</h5>
                 </div>
-            
+                <div class="modal-body">
+                    <p>This interactive map allows users to look at NPS reported visitation statistics by year for National Parks. It also allows the user to adjust the symbol scale.</p>
+                    <p>The data available is from 2000-2018. The scale factor adjust from 1 to 5.</p>
+                    <p>To adjust the year, click on the slider arrows or move the slider. To adjust the symbol scale, use the symbol scale slider. Click on any symbol for a detailed display of information.</p>
+                    <p>NPS data provided from <a href="https://irma.nps.gov" target="_blank" class="link-text">IRMA on NPS</a> | Map Tileset created by <a href="https://brandonkbuchs.github.io" target="_blank" class="link-text">Brandon Buchs</a> on <a href="http://www.mapbox.com" target="_blank" class="link-text">mapbox</a></p> 
                 </div>
-        </div>   
+                <div class="modal-footer">
+                    <button id="closeButton" type="button" class="btn btn-secondary" data-dismiss="modal">Enter Website</button>
+                </div>
+                </div>
+            </div>
+        </div> 
         <div id="map-title" class="text-center"></div>
             <div class="d-flex flex-row">
                 <div class="container col-4" padding="1em">
                         <div class="d-flex flex-column">                   
                             <div id="range-slider"></div>       
                             <div id="symbol-slider"></div>       
-                            <div id="symbol-info"></div>                    
+                            <div id="symbol-info"></div>
+                            <div><p class="desc"><strong>Park Statistics</strong></p></div>                    
                             <div id="panel"></div>
                         </div>                            
                 </div>
                 <div id="map" class="col-lg text-left"></div>
+                <div id="push" class="col-1"></div>
             </div>
     </body>
-    <script type="text/javascript">
-        //Modal code
-        $(window).on('load',function()
-        {
-        $('#myModal').modal('show');
-        });
-    </script>
-
 </html>
