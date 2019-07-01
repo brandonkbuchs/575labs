@@ -4,13 +4,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="author" content="Brandon K Buchs">
         <meta name="description" content="NPS Visitor Statistics Map">
+        <link href="css/bootstrap.css" rel="stylesheet">
+        <link href="css/OSMGeocoder.css" rel="stylsheet">
+        <link href="css/leaflet.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet">
+        <link href="http://k4r573n.github.io/leaflet-control-osm-geocoder/Control.O\SMGeocoder.css" rel="stylesheet">
         <script src="lib/jquery-3.4.1.min.js"></script>
         <script src="lib/bootstrap.min.js"></script>
         <script src="lib/leaflet.js"></script>
+        <script src="lib/OSMGeocoder.js"></script>
         <script src="lib/main.js"></script>
-        <link href="css/bootstrap.css" rel="stylesheet">
-        <link href="css/leaflet.css" rel="stylesheet">
-        <link href="css/style.css" rel="stylesheet">
+        
         <title>National Park Visitor Information Explorer</title>
     </head>
     <body>
@@ -22,9 +26,10 @@
                     <h5 class="modal-title" role="dialog">National Park Visitation Statistics Map | Brandon Buchs</h5>
                 </div>
                 <div class="modal-body">
-                    <p>This interactive map allows users to look at NPS reported visitation statistics by year for National Parks. It also allows the user to adjust the symbol scale.</p>
+                    <p>This interactive map allows users to look at NPS reported visitation statistics by year for National Parks. It also allows the user to adjust the symbol scale and search for parks by name.</p>
                     <p>The data available is from 2000-2018. The scale factor adjust from 1 to 5.</p>
                     <p>To adjust the year, click on the slider arrows or move the slider. To adjust the symbol scale, use the symbol scale slider. Click on any symbol for a detailed display of information.</p>
+                    <p>When searching, please enter the full park name for the most accurate result. Please remember that only parks with recorded data have been plotted on the map.</p> 
                     <p>NPS data provided from <a href="https://irma.nps.gov" target="_blank" class="link-text">IRMA on NPS</a> | Map Tileset created by <a href="https://brandonkbuchs.github.io" target="_blank" class="link-text">Brandon Buchs</a> on <a href="http://www.mapbox.com" target="_blank" class="link-text">mapbox</a></p> 
                 </div>
                 <div class="modal-footer">

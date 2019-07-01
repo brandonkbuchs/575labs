@@ -74,8 +74,6 @@ function createMap() {
     zoom: 3
     });
 
-    
-
     //Add the base tileLayer to the map.
     var basemap = L.tileLayer('https://api.mapbox.com/styles/v1/{username}/{style}/tiles/256/{z}/{x}/{y}@2x?access_token={accessToken}', {
         attribution: 'Map data provided through mapbox.com',
@@ -85,6 +83,9 @@ function createMap() {
         maxZoom: 22,
         minZoom: 2
     }).addTo(map);
+
+    var osmGeocoder = new L.Control.OSMGeocoder();
+    map.addControl(osmGeocoder);
 
     //call getData function
     getData(map);
