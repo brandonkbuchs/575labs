@@ -43,10 +43,9 @@ function setMap() {
             .attr('class', 'gratLines')
             .attr('d', path);
 
-        console.log(error);
-        console.log(csvData);
-        var chapelHill = topojson.feature(city, city.objects.neighborhoods),
-            bikeCrashes = topojson.feature(crash, crash.objects.crashes).features;
+        var chapelHill = topojson.feature(city, city.objects.neighborhoods);
+
+        var bikeCrashes = topojson.feature(crash, crash.objects.crashes).features;
 
         console.log(chapelHill);
         console.log(bikeCrashes);
