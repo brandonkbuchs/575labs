@@ -110,8 +110,8 @@ function joinData(economics, csvData){
         var csvEcon = csvData[i];
         var csvKey = csvEcon.OBJECTID;
 
-        for (var a=0; a<GeorgiaEconomics.length; a++){
-            var geojsonProps = GeorgiaEconomics[a].properties;
+        for (var a=0; a<GaEcon.length; a++){
+            var geojsonProps = GaEcon[a].properties;
             var geojsonKey = geojsonProps.OBJECTID;
 
             if (geojsonKey == csvKey){
