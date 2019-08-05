@@ -48,6 +48,8 @@ function setMap() {
         var chapelHill = topojson.feature(city, city.objects.neighborhoods),
             bikeCrashes = topojson.feature(crash, crash.objects.crashes).features;
 
+        console.log(chapelHill);
+        console.log(bikeCrashes);
         var cities = map.append('path')
             .datum(chapelHill)
             .attr('class', 'cities')
