@@ -2,20 +2,19 @@
 window.onLoad = setMap();
 
 function setMap() {
-    var crashesJson = d3.json('data/crashes.topojson');
-    console.log('crashesJson:', crashesJson);
+    d3.queue()
+        .defer(d3.csv, 'data/crashes.csv')
+        .defer(d3.json, 'data/crashes.topojson')
+        .defer(d3.json, 'data/chapelhill.topojson')
+        .await(callback);
 
-    var cityJson = d3.json('data/chapelhill.topojson');
-    console.log('cityJson:', cityJson);
-
-    var csvData = d3.csv('data/crashes.csv');
-    console.log('csvData:', csvData);
-
-    var city = topojson.feature(cityJson.objects.cityJson), 
-        crashes = topojson.feature(crashesJson.objects.crashesJson).features;
-
-    console.log(city);
-    console.log(crashes);
+    function callback(error, csvData, crashes, city) {
+        console.log(error);
+        console.log(csvData);
+        console.log(crashes);
+        console.log(city);
+    }
+  
 };
 
  
