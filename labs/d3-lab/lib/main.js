@@ -9,12 +9,12 @@ function setMap() {
         .await(callback);
 
     function callback(csvData, trout, state) {
-        console.log(csvData);
-        console.log(trout);
-        console.log(state);
+        console.log('csv:', csvData);
+        console.log('trout.topojson: ', trout);
+        console.log('state.topojson: ', state);
     };
 
     .catch(function(error){
-        console.log(error);
+        console.log('error: ', error);
     });
 };
