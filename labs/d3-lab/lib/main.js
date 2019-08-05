@@ -65,8 +65,8 @@ function makeColorScale(data){
         .range(colorClasses);
 
     var minmax = [
-        d3.min(data, function(d){ return parseFloat(d[expressed]);}),
-        d3.max(data, function(d)){ return parseFloat(d[expressed]);})
+        d3.min(data, function(d){return parseFloat(d[expressed]);}),
+        d3.max(data, function(d){return parseFloat(d[expressed]);})
     ];
 
     colorScale.domain(minmax);
