@@ -32,7 +32,7 @@ function setMap() {
     function callback(error, csvData, econ, city) {
         setGraticule(map, path);
 
-        var economics = topojson.feature(econ, econ.objects.GeorgiaEconomics);
+        var economics = topojson.feature(econ, econ.objects.GaEcon);
 
         var cities = topojson.feature(city, city.objects.GeorgiaCities);
 
