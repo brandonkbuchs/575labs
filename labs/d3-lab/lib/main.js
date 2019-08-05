@@ -10,6 +10,12 @@ function setMap() {
 
     var csvData = d3.csv('data/crashes.csv');
     console.log('csvData:', csvData);
+
+    var city = topojson.feature(cityJson.objects.cityJson), 
+        crashes = topojson.feature(crashesJson.objects.crashesJson).features;
+
+    console.log(city);
+    console.log(crashes);
 };
 
  
