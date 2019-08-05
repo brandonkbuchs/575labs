@@ -30,8 +30,11 @@ function setMap() {
         .await(callback);
 
     function callback(error, csvData, econ, city) {
+        console.log(error);
+        console.log(csvData);
         console.log(econ);
         console.log(city);
+        /*
         setGraticule(map, path);
 
         var economics = topojson.feature(econ, econ.objects.GaEcon).features;
@@ -48,10 +51,10 @@ function setMap() {
         economics = joinData(economics, csvData);
 
         var colorScale = makeColorScale(csvData);
-        setEnumerationUnits(economics, map, path);
+        setEnumerationUnits(economics, map, path);*/
     }; 
 };//end of function setMap
-
+/*
 function makeColorScale(data){
     var colorClasses = [
         '#D4B9DA',
@@ -77,7 +80,7 @@ function makeColorScale(data){
         domainArray.push(val);
     };
 
-    colorScale.domain(domainArray);*/
+    colorScale.domain(domainArray);*//*
 
     return colorScale;
 }; //end of function makeColorScale
@@ -132,8 +135,19 @@ function setEnumerationUnits(economics, map, path) {
         .attr('class', function(d) {
             return 'economics' + d.properties.ID;
         })
-        .attr('d', path);
+        .attr('d', path)
+        .style('fill', function(d){
+            return choropleth(d.properties, colorScale);
+        });
 };
 
-
+function choropleth(props, colorScale){
+    var val = parseFloat(props[expressed]);
+    if (typeof val == 'number' && !isNaN(val)){
+        return colorScale(val);        
+    } else {
+        return "#CCC";
+    };
+};
+*/
  
