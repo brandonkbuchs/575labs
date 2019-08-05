@@ -30,6 +30,8 @@ function setMap() {
         .await(callback);
 
     function callback(error, csvData, econ, city) {
+        console.log(econ);
+        console.log(city);
         setGraticule(map, path);
 
         var economics = topojson.feature(econ, econ.objects.GaEcon).features;
@@ -62,13 +64,20 @@ function makeColorScale(data){
     var colorScale = d3.scaleQuantile()
         .range(colorClasses);
 
-    var domainArray = [];
+    var minmax = [
+        d3.min(data, function(d){ return parseFloat(d[expressed]);}),
+        d3.max(data, function(d)){ return parseFloat(d[expressed]);})
+    ];
+
+    colorScale.domain(minmax);
+
+    /*var domainArray = [];
     for (var i=0; i<data.length; i++){
         var val = parseFloat(data[i][expressed]);
         domainArray.push(val);
     };
 
-    colorScale.domain(domainArray);
+    colorScale.domain(domainArray);*/
 
     return colorScale;
 }; //end of function makeColorScale
