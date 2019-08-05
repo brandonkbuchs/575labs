@@ -8,8 +8,8 @@ function setMap() {
         .defer(d3.json, 'data/state.topojson')
         .await(callback);
 
-    function callback(error, csvData, trout, state) {
-        console.log(error);
+    function callback(csvData, trout, state) {
+
         console.log(csvData);
         console.log(trout);
         console.log(state);
