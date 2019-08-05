@@ -1,4 +1,21 @@
 //begin script when window loads
+(function(){
+    var attrArray = ['pop', 'workforce', 'unempRaw', 'unempPct' ,'blackUnempP', 'asianUnempP', 'whiteUnempP', 'hispanUnempP'];
+    var expressed = attrArray[0];
+
+    var chartw = window.innerWidth * 0.425, 
+        charth = 460,
+        leftp = 25,
+        rightp = 2,
+        topBottomp = 5,
+        chartInnerw = chartw - leftp - rightp,
+        chartInnerh = charth - topBottomp * 2,
+        translate = 'translate(' + leftp + ',' + topBottomp +')';
+
+    var yScale = d3.scale.linear()
+        .range([463,0])
+        .domain([0,110]);    
+
 window.onLoad = setMap();
 
 function setMap() {
@@ -57,16 +74,8 @@ function setMap() {
     }; 
 };//end of function setMap
 
-function setChart(csvData, colorScale, expressed){
-    var chartw = window.innerWidth * 0.425, 
-        charth = 460,
-        leftp = 25,
-        rightp = 2,
-        topBottomp = 5,
-        chartInnerw = chartw - leftp - rightp,
-        chartInnerh = charth - topBottomp * 2,
-        translate = 'translate(' + leftp + ',' + topBottomp +')';
-    
+function setChart(csvData, colorScale){
+     
     var chart = d3.select('body')
         .append('svg')
         .attr('width', chartw)
@@ -78,10 +87,6 @@ function setChart(csvData, colorScale, expressed){
         .attr('width', chartInnerw)
         .attr('height', chartInnerh)
         .attr('transform', translate);
-
-    var yScale = d3.scaleLinear()
-        .range([463,0])
-        .domain([0,100]);
 
     var bars = chart.selectAll('.bars')
         .data(csvData)
@@ -128,7 +133,7 @@ function setChart(csvData, colorScale, expressed){
         .attr('transform', translate)
 };
 
-function makeColorScale(data, expressed){
+function makeColorScale(data){
     var colorClasses = [
         '#D4B9DA',
         '#C994C7',
@@ -206,7 +211,7 @@ function setEnumerationUnits(economics, map, path, colorScale) {
         });
 };
 
-function choropleth(props, colorScale, expressed){
+function choropleth(props, colorScale){
     var val = parseFloat(props[expressed]);
     if (typeof val == 'number' && !isNaN(val)){
         return colorScale(val);        
@@ -214,4 +219,55 @@ function choropleth(props, colorScale, expressed){
         return "#CCC";
     };
 };
+
+function createDropdown(csvData) {
+    var dropdrown = d3.select('body')
+        .append('select')
+        .attr('class','dropdown')
+        .on('change', function(){
+            changeAttribute(this.value, csvData)
+        });
+
+    var titleOption = dropdown.append('option')
+        .attr('class', 'titleOption')
+        .attr('diabled', 'true')
+        .text('Select Attribute');
+
+    var attrOptions = dropdown.selectAll('attrOptions')
+        .data(attributeArray)
+        .enter()
+        .append('option')
+        .attr('value', function(d)}{return d;})
+        .text(function(d){return d; });
+};
+
+function changeAttribute(attribute, csvData) {
+    expressed = attribute;
+    var colorScale = makeColorScale(csvData);
+
+    var economics = d3.selectAll('economics')
+        .style('fill', function(d){
+            return choropleth(d.properties, colorScale)
+        });
+    
+    var bars = d3.selectAll('.bars')
+        .sort(function(a, b){
+            return b[expressed] - a[expressed];
+        })
+        .attr('x', function(d, i){
+            return i * (chartInnerw /csvData.length) + leftp;
+        })
+        .attr('height', function(d,i){
+            return 463 - yScale(parseFloat(d[expressed]));
+        })
+        .attr('y',function(d,i){
+            return yScale(parseFloat(d[expressed])) + topBottomp;
+        })
+        .style('fill', function(d){
+            return choropleth(d, colorScale);
+        });
+};
+)};
+
+
  
