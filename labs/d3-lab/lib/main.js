@@ -13,10 +13,6 @@ function setMap() {
         console.log('csv:', csvData);
         console.log('trout.topojson: ', trout);
         console.log('state.topojson: ', state);
-        .catch(function(error){
-            console.log('error: ', error);
-        });
     };
-
     
 };
