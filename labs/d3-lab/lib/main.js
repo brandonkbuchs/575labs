@@ -12,7 +12,7 @@ function setMap() {
         .attr('height', height);
 
     var projection = d3.geoAlbers()
-        .center([35.9132, -79.0558])
+        .center([-79.0558, 35.9132])
         .rotate([-2, 0, 0])
         .parallels([30, 40])
         .scale(2500)
