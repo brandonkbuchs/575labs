@@ -21,7 +21,6 @@ function setMap() {
         .projection(projection);
     
     console.log(map);
-    console.log(path);
 
     d3.queue()
         .defer(d3.csv, 'data/crashes.csv')
