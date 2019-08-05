@@ -13,9 +13,9 @@ function setMap() {
 
     var projection = d3.geoConicEqualArea()
         .center([-79.0558, 35.9132])
-        .rotate([-2, 0, 0])
+        .rotate([0, 0, 0])
         .parallels([30, 40])
-        .scale(90)
+        .scale(2500)
         .translate([width / 2, height / 2]);
 
     var path = d3.geoPath()
@@ -32,7 +32,7 @@ function setMap() {
     function callback(error, csvData, econ, city) {
         setGraticule(map, path);
 
-        var economics = topojson.feature(econ, econ.objects.GeorgiaEconomics).features;
+        var economics = topojson.feature(econ, econ.objects.GeorgiaEconomics);
 
         var cities = topojson.feature(city, city.objects.GeorgiaCities);
 
