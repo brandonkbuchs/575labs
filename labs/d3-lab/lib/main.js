@@ -20,6 +20,7 @@ function setMap() {
 
     var path = d3.geoPath()
         .projection(projection);
+
     d3.queue()
         .defer(d3.csv, 'data/crashes.csv')
         .defer(d3.json, 'data/crashes.topojson')
@@ -37,7 +38,7 @@ function setMap() {
             .attr('class', 'cities')
             .attr('d', path);
 
-        var crashes = map.selectAll('crashes')
+        var crashes = map.selectAll('.crashes')
             .data(bikeCrashes)
             .enter()
             .append('path')
