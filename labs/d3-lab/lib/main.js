@@ -6,7 +6,7 @@ function setMap() {
         .defer(d3.csv, 'data/VAStockedTroutStreams.csv')
         .defer(d3.json, 'data/trout.topojson')
         .defer(d3.json, 'data/state.topojson')
-        .await(callback)
+        .await(callback);
         
 
     function callback(csvData, trout, state) {
