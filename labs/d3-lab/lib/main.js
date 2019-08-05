@@ -57,7 +57,7 @@ function setMap() {
     }; 
 };//end of function setMap
 
-function setChart(csvData, colorScale){
+function setChart(csvData, colorScale, expressed){
     var chartw = window.innerWidth * 0.425, 
         charth = 460,
         leftp = 25,
@@ -171,14 +171,6 @@ function makeColorScale(data){
 
     colorScale.domain(minmax);
 
-    /*var domainArray = [];
-    for (var i=0; i<data.length; i++){
-        var val = parseFloat(data[i][expressed]);
-        domainArray.push(val);
-    };
-
-    colorScale.domain(domainArray);*/
-
     return colorScale;
 }; //end of function makeColorScale
 
@@ -238,7 +230,7 @@ function setEnumerationUnits(economics, map, path, colorScale) {
         });
 };
 
-function choropleth(props, colorScale){
+function choropleth(props, colorScale, expressed){
     var val = parseFloat(props[expressed]);
     if (typeof val == 'number' && !isNaN(val)){
         return colorScale(val);        
