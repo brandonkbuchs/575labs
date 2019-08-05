@@ -13,7 +13,7 @@ function setMap() {
         console.log(csvData);
         console.log(crashes);
         console.log(city);
-    }
+    };
   
 };
 
