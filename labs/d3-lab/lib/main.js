@@ -20,6 +20,9 @@ function setMap() {
 
     var path = d3.geoPath()
         .projection(projection);
+    
+    console.log(map);
+    console.log(path);
 
     d3.queue()
         .defer(d3.csv, 'data/crashes.csv')
@@ -47,6 +50,8 @@ function setMap() {
 
         var bikeCrashes = topojson.feature(crash, crash.objects.crashes);
 
+        var attributeArray = ['bikeAge', 'crashTime', 'crashYr', 'driverAge'];
+        
         console.log(chapelHill);
         console.log(bikeCrashes);
         var cities = map.append('path')
