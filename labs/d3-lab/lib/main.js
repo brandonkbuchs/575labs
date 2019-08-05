@@ -83,13 +83,12 @@ function setChart(csvData, colorScale, expressed){
         .range([463,0])
         .domain([0,100]);
 
-
     var bars = chart.selectAll('.bars')
         .data(csvData)
         .enter()
         .append('rect')
         .sort(function(a, b){
-            return a[expressed]-b[expressed];
+            return b[expressed]-a[expressed];
         })
         .attr('class', function(d){
             return "bars" + d.OBJECTID;
@@ -108,28 +107,6 @@ function setChart(csvData, colorScale, expressed){
             return choropleth(d, colorScale);
         });
     
-    var numbers = chart.selectAll('.numbers')
-        .data(csvData)
-        .enter()
-        .append('text')
-        .sort(function(a,b){
-            return a[expressed]-b[expressed];
-        })
-        .attr('class',function(d){
-            return "numbers" + d.OBJECTID;
-        })
-        .attr('text-anchor','middle')
-        .attr('x', function(d,i){
-            var fraction = chartw / csvData.length;
-            return i * fraction + (fraction - 1) / 2;
-        })
-        .attr('y', function(d){
-            return charth - yScale(parseFloat(d[expressed])) + 15;
-        })
-        .text(function(d){
-            return d[expressed];
-        });
-
     var chartTitle = chart.append('text')
         .attr('x',20)
         .attr('y',40)
