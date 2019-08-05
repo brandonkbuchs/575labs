@@ -32,8 +32,8 @@ function setMap() {
         console.log(crashes);
         console.log(city);
 
-        var chapelHill = topojson.feature(city, city.objects.chapelhill),
-            bikeCrashes = topojson.feature(crashes, crashes.objects.crashes).features;
+        var chapelHill = topojson.feature(city, city.objects.arcs),
+            bikeCrashes = topojson.feature(crashes, crashes.objects.ID).features;
 
         console.log(chapelHill);
         console.log(bikeCrashes);
