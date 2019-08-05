@@ -17,6 +17,9 @@ function setMap() {
         .parallels([43, 63])
         .scale(2500)
         .translate([width / 2, height / 2]);
+
+    var path = d3.geoPath()
+        .projection(projection);
     d3.queue()
         .defer(d3.csv, 'data/crashes.csv')
         .defer(d3.json, 'data/crashes.topojson')
@@ -34,6 +37,20 @@ function setMap() {
 
         console.log(chapelHill);
         console.log(bikeCrashes);
+
+        var cities = map.append('path')
+            .datum(chapelHill)
+            .attr('class', 'cities')
+            .attr('d', path);
+
+        var crashes = map.selectAll('crashes')
+            .data(bikeCrashes)
+            .enter()
+            .append('path')
+            .attr('class', function(d) {
+                return 'crashes' + d.properties.ID;
+            })
+            .attr('d', path);
     };
   
 };
