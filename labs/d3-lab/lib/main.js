@@ -10,7 +10,8 @@ function setMap() {
         .await(callback);
         
 
-    function callback(csvData, trout, state) {
+    function callback(topoJson, csvData, trout, state) {
+        console.log('topoJson:', topoJson);
         console.log('csv:', csvData);
         console.log('trout.topojson: ', trout);
         console.log('state.topojson: ', state);
