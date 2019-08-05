@@ -7,9 +7,7 @@ function setMap() {
         .defer(d3.json, 'data/trout.topojson')
         .defer(d3.json, 'data/state.topojson')
         .await(callback)
-        .catch(function(error){
-            console.log('error: ', error);
-        });
+        
 
     function callback(csvData, trout, state) {
         console.log('csv:', csvData);
@@ -19,3 +17,7 @@ function setMap() {
 
     
 };
+
+d3.catch(function(error){
+    console.log('error: ', error);
+});
