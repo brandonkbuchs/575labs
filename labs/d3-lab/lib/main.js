@@ -152,7 +152,7 @@ function setChart(csvData, colorScale, expressed){
         .attr('transform', translate)
 };
 
-function makeColorScale(data){
+function makeColorScale(data, expressed){
     var colorClasses = [
         '#D4B9DA',
         '#C994C7',
