@@ -10,11 +10,11 @@ function setMap() {
         .attr('width', width)
         .attr('height', height);
 
-    var projection = d3.geoAlbers()
+    var projection = d3.geoConicEqualArea()
         .center([-79.0558, 35.9132])
         .rotate([-2, 0, 0])
         .parallels([30, 40])
-        .scale(25)
+        .scale(90)
         .translate([width / 2, height / 2]);
 
     var path = d3.geoPath()
