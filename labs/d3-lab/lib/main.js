@@ -2,11 +2,11 @@
 window.onLoad = setMap();
 
 function setMap() {
-    var jsonFiles = ['data/crashes.topojson', 'data/chapelhill.topojson'];
+    var crashesJson = d3.json('data/crashes.topojson');
+    console.log('crashesJson:', crashesJson);
 
-    Promise.all(jsonFiles.map(url => d3.json(url))).then(function(values){
-        console.log(values);
-    });
+    var cityJson = d3.json('data/chapelhill.topojson');
+    console.log('cityJson:', cityJson);
 
     var csvData = d3.csv('data/crashes.csv');
     console.log('csvData:', csvData);
