@@ -14,7 +14,7 @@ function setMap() {
     var projection = d3.geoAlbers()
         .center([-79.0558, 35.9132])
         .rotate([-2, 0, 0])
-        .parallels([43, 63])
+        .parallels([30, 40])
         .scale(2500)
         .translate([width / 2, height / 2]);
 
@@ -29,7 +29,7 @@ function setMap() {
     function callback(error, csvData, crash, city) {
         console.log(error);
         console.log(csvData);
-        var chapelHill = topojson.feature(city, city.objects.chapelhill),
+        var chapelHill = topojson.feature(city, city.objects.neighborhoods),
             bikeCrashes = topojson.feature(crash, crash.objects.crashes).features;
 
         var cities = map.append('path')
