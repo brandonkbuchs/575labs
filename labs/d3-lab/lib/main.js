@@ -12,7 +12,7 @@ function setMap() {
         .attr('height', height);
 
     var projection = d3.geoAlbers()
-        .center([-79.0558, 35.9132])
+        .center([35.9132, -79.0558])
         .rotate([-2, 0, 0])
         .parallels([30, 40])
         .scale(2500)
@@ -28,6 +28,21 @@ function setMap() {
         .await(callback);
 
     function callback(error, csvData, crash, city) {
+        var graticule = d3.geoGraticule()
+            .step([5, 5]);
+        
+        var gratBackground = map.append('path')
+            .datum(graticule.outline())
+            .attr('class', 'gratBackground')
+            .attr('d', path);
+
+        var gratLines = map.selectAll('.gratlines')
+            .data(graticule.lines())
+            .enter()
+            .append('path')
+            .attr('class', 'gratLines')
+            .attr('d', path);
+
         console.log(error);
         console.log(csvData);
         var chapelHill = topojson.feature(city, city.objects.neighborhoods),
