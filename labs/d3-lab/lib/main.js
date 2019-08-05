@@ -13,6 +13,12 @@ function setMap() {
         console.log(csvData);
         console.log(crashes);
         console.log(city);
+
+        var chapelHill = topojson.feature(city, city.objects.chapelHill),
+            bikeCrashes = topojson.feature(crashes, crashes.objects.bikeCrashes).features;
+
+        console.log(chapelHill);
+        console.log(bikeCrashes);
     };
   
 };
