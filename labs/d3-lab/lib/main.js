@@ -137,8 +137,7 @@ function setChart(csvData, colorScale, expressed){
         .text('Number of Variable' + expressed + 'in each region');
 
     var yAxis = d3.axisLeft()
-        .scale(yScale)
-        .orient('left');
+        .scale(yScale);
     
     var axis = chart.append('g')
         .attr('class', 'axis')
