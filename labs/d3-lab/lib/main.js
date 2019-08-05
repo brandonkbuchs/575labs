@@ -51,9 +51,20 @@ function setMap() {
         economics = joinData(economics, csvData);
 
         var colorScale = makeColorScale(csvData);
-        setEnumerationUnits(economics, map, path);
+        setEnumerationUnits(economics, map, path, colorScale);
+
+        setChart(csvData, colorScale);
     }; 
 };//end of function setMap
+
+function setChart(csvData, colorScale){
+    var chartw = 550, charth = 460;
+    var chart = d3.select('body')
+        .append('svg')
+        .attr('width', chartw)
+        .attr('height', charth)
+        .attr('class', 'chart');
+};
 
 function makeColorScale(data){
     var colorClasses = [
@@ -127,7 +138,7 @@ function joinData(economics, csvData){
     return economics;
 }; //end of function joinData
 
-function setEnumerationUnits(economics, map, path) {
+function setEnumerationUnits(economics, map, path, colorScale) {
     var economics = map.selectAll('.economics')
         .data(economoics)
         .enter()

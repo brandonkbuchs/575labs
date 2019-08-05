@@ -16,10 +16,18 @@
 
 .map {
     border: medium solid #999;
+    margin: 10px 0 0 20px;
 }
 
 .economics {
     stroke: #000;
     stroke-width: 0.5px;
     stroke-linecap: round;
+}
+
+.chart {
+    background-color: rgba(128, 128, 128, 0.2);
+    border: medium solid #999;
+    float: right;
+    margin: 10px 20px 0 0;
 }
