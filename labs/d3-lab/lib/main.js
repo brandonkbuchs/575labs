@@ -15,7 +15,7 @@ function setMap() {
         .center([-79.0558, 35.9132])
         .rotate([0, 0, 0])
         .parallels([30, 40])
-        .scale(3500)
+        .scale(3000)
         .translate([width / 2, height / 2]);
 
     var path = d3.geoPath()
@@ -124,7 +124,7 @@ function setChart(csvData, colorScale, expressed){
             return i * fraction + (fraction - 1) / 2;
         })
         .attr('y', function(d){
-            return charth - ySacle(parseFloat(d[expressed])) + 15;
+            return charth - yScale(parseFloat(d[expressed])) + 15;
         })
         .text(function(d){
             return d[expressed];
