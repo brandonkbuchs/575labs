@@ -26,17 +26,11 @@ function setMap() {
         .defer(d3.json, 'data/chapelhill.topojson')
         .await(callback);
 
-    function callback(error, csvData, crashes, city) {
+    function callback(error, csvData, crash, city) {
         console.log(error);
         console.log(csvData);
-        console.log(crashes);
-        console.log(city);
-
-        var chapelHill = topojson.feature(city, city.objects.arcs),
-            bikeCrashes = topojson.feature(crashes, crashes.objects.ID).features;
-
-        console.log(chapelHill);
-        console.log(bikeCrashes);
+        var chapelHill = topojson.feature(city, city.objects.chapelhill),
+            bikeCrashes = topojson.feature(crash, crash.objects.crashes).features;
 
         var cities = map.append('path')
             .datum(chapelHill)
