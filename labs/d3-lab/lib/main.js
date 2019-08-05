@@ -2,8 +2,9 @@
 window.onLoad = setMap();
 
 function setMap() {
+
     var width = 960, height = 460;
-    
+
     var map = d3.select('body')
         .append('svg')
         .attr('class', 'map')
@@ -19,54 +20,109 @@ function setMap() {
 
     var path = d3.geoPath()
         .projection(projection);
-    
+
     console.log(map);
 
     d3.queue()
-        .defer(d3.csv, 'data/crashes.csv')
-        .defer(d3.json, 'data/crashes.topojson')
-        .defer(d3.json, 'data/chapelhill.topojson')
+        .defer(d3.csv, 'data/gaEcon')
+        .defer(d3.json, 'data/GeorgiaEconomics.topojson')
+        .defer(d3.json, 'data/GeorgiaCities.topojson')
         .await(callback);
 
-    function callback(error, csvData, crash, city) {
-        var graticule = d3.geoGraticule()
-            .step([5, 5]);
-        
-        var gratBackground = map.append('path')
-            .datum(graticule.outline())
-            .attr('class', 'gratBackground')
-            .attr('d', path);
+    function callback(error, csvData, econ, city) {
+        setGraticule(map, path);
 
-        var gratLines = map.selectAll('.gratlines')
-            .data(graticule.lines())
-            .enter()
-            .append('path')
-            .attr('class', 'gratLines')
-            .attr('d', path);
+        var economics = topojson.feature(econ, econ.objects.GeorgiaEconomics).features;
 
-        var chapelHill = topojson.feature(city, city.objects.neighborhoods);
+        var cities = topojson.feature(city, city.objects.GeorgiaCities);
 
-        var bikeCrashes = topojson.feature(crash, crash.objects.crashes);
-
-        var attributeArray = ['bikeAge', 'crashTime', 'crashYr', 'driverAge'];
-        
-        console.log(chapelHill);
-        console.log(bikeCrashes);
         var cities = map.append('path')
-            .datum(chapelHill)
+            .datum(cities)
             .attr('class', 'cities')
             .attr('d', path);
 
-        var crashes = map.selectAll('.crashes')
-            .data(bikeCrashes)
-            .enter()
-            .append('path')
-            .attr('class', function(d) {
-                return 'crashes' + d.properties.ID;
-            })
-            .attr('d', path);
+        economics = joinData(economics, csvData);
+
+        var colorScale = makeColorScale(csvData);
+        setEnumerationUnits(economics, map, path);
+    }; 
+};//end of function setMap
+
+function makeColorScale(data){
+    var colorClasses = [
+        '#D4B9DA',
+        '#C994C7',
+        '#DF65B0',
+        '#DD1C77',
+        '#980043'
+    ];
+
+    var colorScale = d3.scaleQuantile()
+        .range(colorClasses);
+
+    var domainArray = [];
+    for (var i=0; i<data.length; i++){
+        var val = parseFloat(data[i][expressed]);
+        domainArray.push(val);
     };
-  
+
+    colorScale.domain(domainArray);
+
+    return colorScale;
+}; //end of function makeColorScale
+
+function setGraticule(map, path){
+    var graticule = d3.geoGraticule()
+        .step([5, 5]);
+    
+    var gratBackground = map.append('path')
+        .datum(graticule.outline())
+        .attr('class', 'gratBackground')
+        .attr('d', path);
+
+    var gratLines = map.selectAll('.gratlines')
+        .data(graticule.lines())
+        .enter()
+        .append('path')
+        .attr('class', 'gratLines')
+        .attr('d', path);
+
+};//end of function setGraticule
+
+function joinData(economics, csvData){
+    var attributeArray = ['pop', 'workforce', 'unempRaw', 'unempPct' ,'blackUnempP', 'asianUnempP', 'whiteUnempP', 'hispanUnempP'];
+    
+    for (var i=0; i<csvData.length; i++){
+        var csvEcon = csvData[i];
+        var csvKey = csvEcon.OBJECTID;
+
+        for (var a=0; a<GeorgiaEconomics.length; a++){
+            var geojsonProps = GeorgiaEconomics[a].properties;
+            var geojsonKey = geojsonProps.OBJECTID;
+
+            if (geojsonKey == csvKey){
+                attributeArray.forEach(function(attr){
+                    var val = parseFloat(csvEcon[attr]);
+
+                    geojsonProps[attr] = val;
+                });
+            };
+        };
+    };
+
+    return economics;
+}; //end of function joinData
+
+function setEnumerationUnits(economics, map, path) {
+    var economics = map.selectAll('.economics')
+        .data(economoics)
+        .enter()
+        .append('path')
+        .attr('class', function(d) {
+            return 'economics' + d.properties.ID;
+        })
+        .attr('d', path);
 };
+
 
  
