@@ -11,7 +11,7 @@ function setMap() {
         .attr('width', width)
         .attr('height', height);
 
-    var projection = d3.geo.conicConformal()
+    var projection = d3.geoAlbers()
         .center([-79.0558, 35.9132])
         .rotate([-2, 0, 0])
         .parallels([43, 63])
