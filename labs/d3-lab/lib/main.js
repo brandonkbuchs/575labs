@@ -110,7 +110,13 @@ function setChart(csvData, colorScale){
         })
         .style('fill', function(d){
             return choropleth(d, colorScale);
-        });
+        })
+        .on('mouseover', highlight)
+        .on('mouseout', dehighlight)
+        .on('mousemove', moveLabel);
+
+        var desc = bars.append('desc')
+            .text('{"stroke": "#000", "stroke-width": "0px"}');
     
     var chartTitle = chart.append('text')
         .attr('x',20)
@@ -208,7 +214,17 @@ function setEnumerationUnits(economics, map, path, colorScale) {
         .attr('d', path)
         .style('fill', function(d){
             return choropleth(d.properties, colorScale);
-        });
+        })
+        .on('mouseover', function(d){
+            highlight(d.properties);
+        })
+        .on('mouseout', function(d){
+            dehighlight(d.properties);
+        })
+        .on('mousemove', moveLabel);
+
+    var desc = economics.append('desc')
+        .text('{"stroke":"#000", "stroke-width":"0.5px"}');
 };
 
 function choropleth(props, colorScale){
@@ -287,6 +303,67 @@ function updateChart(bars, n, colorScale){
     var chartTitle = d3.select('.chartTitle')
         .text('Number of Variable ' + expressed + 'in each region');
 }; //end of updateChart
+
+function highlight(props){
+    var selected = d3.selectAll('.' + props.OBJECTID)
+        .style('stroke', 'blue')
+        .style('stroke-width', '2');
+};
+
+function dehighlight(props){
+    var selected = d3.selectAll('.' + props.OBJECTID)
+        .style('stroke', function(){
+            return getStyle(this, 'stroke');
+        })
+        .style('stroke-width', function(){
+            return getStyle(this, 'stroke-width');
+        });
+
+    function getStyle(element, styleName){
+        var styleText = d3.select(element)
+            .select('desc')
+            .text();
+
+        var styleObject = JSON.parse(styleText);
+
+        return styleObject[styleName];
+    };
+};
+
+function setLabel(props){
+    var labelAttribute = '<h1>' + props[expressed] + '</h1><b>' + expressed + '</b>';
+
+    var infoLabel = d3.select('body')
+        .append(div)
+        .attr('class', 'infoLabel')
+        .attr('id', props.OBJECTID + '_label')
+        .html(labelAttribute);
+
+    var econName = infoLabel.append('div')
+        .attr('class', 'labelname')
+        .html(props.name);
+};
+
+function moveLabel(){
+
+    var labelWidth = d3.select('.infoLabel')
+        .node()
+        .getBoundingClientRect()
+        .width;
+
+    var x1 = d3.event.clientX + 10,
+        y1 = d3.event.clientY - 75,
+        x2 = d3.event.clientX - labelWidth - 10,
+        y2 = d3.event.clientY + 25;
+
+    var x = d3.event.clientX > window.innerWidth - labelWidth - 20 ? x2 : x1;
+    var y = d3.event.clientY < 75 ? y2 : y1;        
+
+
+    d3.select('.infoLabel')
+        .style('left', x + 'px')
+        .style('top', y + 'px');
+};
 
 });
 
