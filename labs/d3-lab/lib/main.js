@@ -12,7 +12,7 @@
         chartInnerh = charth - topBottomp * 2,
         translate = 'translate(' + leftp + ',' + topBottomp +')';
 
-    var yScale = d3.scale.linear()
+    var yScale = d3.scaleLinear()
         .range([463,0])
         .domain([0,110]);    
 
