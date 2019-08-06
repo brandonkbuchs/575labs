@@ -283,6 +283,9 @@ function updateChart(bars, n, colorScale){
     .style('fill', function(d){
         return choropleth(d, colorScale);
     });
+
+    var chartTitle = d3.select('.chartTitle')
+        .text('Number of Variable ' + expressed + 'in each region');
 }; //end of updateChart
 
 });
