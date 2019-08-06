@@ -1,6 +1,6 @@
 //begin script when window loads
 (function(){
-    var attrArray = ['objectid', 'geoid', 'pop', 'workforce', 'unempRaw', 'unempPct' ,'blackUnempP', 'asianUnempP', 'whiteUnempP', 'hispanUnempP', 'shapeA', 'shapeL'];
+    var attrArray = ['pop','workforce','unemp','unemppct','blackunemppct','asianunemppct','whiteunemppct','hispanicunemppct'];
     var expressed = attrArray[0];
 
     var chartw = window.innerWidth * 0.425, 
@@ -113,7 +113,7 @@ function setChart(csvData, colorScale){
         .attr('x',20)
         .attr('y',40)
         .attr('class','chartTitle')
-        .text('Number of Variable' + expressed + 'in each region');
+        .text('Number of Variable ' + expressed + ' in each city');
 
     var yAxis = d3.axisLeft()
         .scale(yScale);
