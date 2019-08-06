@@ -237,7 +237,7 @@ function createDropdown(csvData) {
         .data(attributeArray)
         .enter()
         .append('option')
-        .attr('value', function(d)}{return d;})
+        .attr('value', function(d){return d;})
         .text(function(d){return d; });
 };
 
