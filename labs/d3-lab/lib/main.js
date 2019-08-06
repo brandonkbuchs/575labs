@@ -38,8 +38,6 @@ function setMap() {
     var path = d3.geoPath()
         .projection(projection);
 
-    console.log(map);
-
     d3.queue()
         .defer(d3.csv, 'data/gaEcon.csv')
         .defer(d3.json, 'data/GeorgiaEconomics.topojson')
@@ -47,18 +45,11 @@ function setMap() {
         .await(callback);
 
     function callback(error, csvData, econ, city) {
-        console.log(error);
-        console.log(csvData);
-        console.log(econ);
-        console.log(city);
     
         setGraticule(map, path);
 
         var economics = topojson.feature(econ, econ.objects.GaEcon).features;
-        console.log(economics);
-
         var cities = topojson.feature(city, city.objects.GeorgiaCities);
-        console.log(cities);
 
         var cities = map.append('path')
             .datum(cities)
