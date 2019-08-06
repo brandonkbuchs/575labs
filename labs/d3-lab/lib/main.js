@@ -285,7 +285,7 @@ function updateChart(bars, n, colorScale){
     });
 }; //end of updateChart
 
-)};
+});
 
 
  
