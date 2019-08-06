@@ -1,6 +1,6 @@
 //begin script when window loads
 (function(){
-    var attrArray = ['pop', 'workforce', 'unempRaw', 'unempPct' ,'blackUnempP', 'asianUnempP', 'whiteUnempP', 'hispanUnempP'];
+    var attrArray = ['objectid', 'geoid', 'pop', 'workforce', 'unempRaw', 'unempPct' ,'blackUnempP', 'asianUnempP', 'whiteUnempP', 'hispanUnempP', 'shapeA', 'shapeL'];
     var expressed = attrArray[0];
 
     var chartw = window.innerWidth * 0.425, 
@@ -171,7 +171,6 @@ function setGraticule(map, path){
 };//end of function setGraticule
 
 function joinData(economics, csvData){
-    var attributeArray = ['pop', 'workforce', 'unempRaw', 'unempPct' ,'blackUnempP', 'asianUnempP', 'whiteUnempP', 'hispanUnempP'];
     
     for (var i=0; i<csvData.length; i++){
         var csvEcon = csvData[i];
@@ -182,7 +181,7 @@ function joinData(economics, csvData){
             var geojsonKey = geojsonProps.OBJECTID;
 
             if (geojsonKey == csvKey){
-                attributeArray.forEach(function(attr){
+                attrArray.forEach(function(attr){
                     var val = parseFloat(csvEcon[attr]);
 
                     geojsonProps[attr] = val;
@@ -241,7 +240,7 @@ function createDropdown(csvData) {
         .text('Select Attribute');
 
     var attrOptions = dropdown.selectAll('attrOptions')
-        .data(attributeArray)
+        .data(attrArray)
         .enter()
         .append('option')
         .attr('value', function(d){return d;})
@@ -332,7 +331,7 @@ function setLabel(props){
 
     var econName = infoLabel.append('div')
         .attr('class', 'labelname')
-        .html(props.name);
+        .html(props.GEOID);
 };
 
 function moveLabel(){
