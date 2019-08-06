@@ -1,4 +1,4 @@
-OBJECTID,GEOID,Population,Workforce,Unemployed,UnempPct,PblackUn,PasianUn,pNHWhite,pHispani,Shape__Are,Shape__Len
+oid,gid,pop,labor,unemp,unemppct,blackunemppct,asianunemppct,whiteunemppct,hispanicunemppct,shapearea,shapelen
 1,1382468,104,90,58,14.8,,,7.8,47.1,25407635.1030273,30211.9245840078
 2,1343668,90,66,54,29,73.5,,4.6,306.4,34481649.8500977,42796.1264558909
 3,1327988,407,340,77,4,15.4,,3.6,13.3,150660244.028076,90021.9806890978
