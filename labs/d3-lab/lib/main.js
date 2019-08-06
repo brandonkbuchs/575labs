@@ -266,7 +266,25 @@ function changeAttribute(attribute, csvData) {
         .style('fill', function(d){
             return choropleth(d, colorScale);
         });
-};
+
+    updateChart(bars, csvData.length, colorScale);
+}; //end of changeAttribute
+
+function updateChart(bars, n, colorScale){
+    bars.attr('x', function(d,i){
+        return i * (chartInnerw / n) + leftp;
+    })
+    .attr('height', function(d,i){
+        return 463 - yScale(parseFloat(d[expressed]));
+    })
+    .attr('y', function(d,i){
+        return yScale(parseFloat(d[expressed])) + topBottomp;
+    })
+    .style('fill', function(d){
+        return choropleth(d, colorScale);
+    });
+}; //end of updateChart
+
 )};
 
 
