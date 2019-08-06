@@ -43,8 +43,8 @@
     font-weight: bold;
 }
 
-.chartBackground {
-    fill: rba(128,128,128,0.2);
+.chartBg {
+    fill: #CCC;
 }
 
 .chartFrame {
