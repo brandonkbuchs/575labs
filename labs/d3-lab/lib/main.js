@@ -87,7 +87,7 @@ function setChart(csvData, colorScale){
             return b[expressed]-a[expressed];
         })
         .attr('class', function(d){
-            return "bars" + d.OBJECTID;
+            return "bars" + d.oid;
         })
         .attr('width', chartw / csvData.length - 1)
         .attr('x', function(d, i){
@@ -174,11 +174,11 @@ function joinData(economics, csvData){
     
     for (var i=0; i<csvData.length; i++){
         var csvEcon = csvData[i];
-        var csvKey = csvEcon.OBJECTID;
+        var csvKey = csvEcon.oid;
 
         for (var a=0; a<economics.length; a++){
             var geojsonProps = economics[a].properties;
-            var geojsonKey = geojsonProps.OBJECTID;
+            var geojsonKey = geojsonProps.oid;
 
             if (geojsonKey == csvKey){
                 attrArray.forEach(function(attr){
@@ -295,13 +295,13 @@ function updateChart(bars, n, colorScale){
 }; //end of updateChart
 
 function highlight(props){
-    var selected = d3.selectAll('.' + props.OBJECTID)
+    var selected = d3.selectAll('.' + props.oid)
         .style('stroke', 'blue')
         .style('stroke-width', '2');
 };
 
 function dehighlight(props){
-    var selected = d3.selectAll('.' + props.OBJECTID)
+    var selected = d3.selectAll('.' + props.oid)
         .style('stroke', function(){
             return getStyle(this, 'stroke');
         })
@@ -326,12 +326,12 @@ function setLabel(props){
     var infoLabel = d3.select('body')
         .append(div)
         .attr('class', 'infoLabel')
-        .attr('id', props.OBJECTID + '_label')
+        .attr('id', props.oid + '_label')
         .html(labelAttribute);
 
     var econName = infoLabel.append('div')
         .attr('class', 'labelname')
-        .html(props.GEOID);
+        .html(props.gid);
 };
 
 function moveLabel(){
