@@ -29,9 +29,9 @@ function setMap() {
         .attr('height', height);
 
     var projection = d3.geoConicEqualArea()
-        .center([-79.0558, 31.9132])
+        .center([-84, 33])
         .rotate([0, 0, 0])
-        .parallels([30, 50])
+        .parallels([24, 38])
         .scale(500)
         .translate([width / 2, height / 2]);
 
