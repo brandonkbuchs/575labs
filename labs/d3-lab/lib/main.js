@@ -62,6 +62,8 @@ function setMap() {
         setEnumerationUnits(economics, map, path, colorScale);
 
         setChart(csvData, colorScale);
+        createDropdown(csvData);
+        
     }; 
 };//end of function setMap
 
