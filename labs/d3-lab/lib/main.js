@@ -41,19 +41,19 @@ function setMap() {
     d3.queue()
         .defer(d3.csv, 'data/gaEcon.csv')
         .defer(d3.json, 'data/GeorgiaEconomics.topojson')
-        .defer(d3.json, 'data/GeorgiaCities.topojson')
+        .defer(d3.json, 'data/ga.topojson')
         .await(callback);
 
-    function callback(error, csvData, econ, city) {
+    function callback(error, csvData, econ, state) {
     
         setGraticule(map, path);
 
         var economics = topojson.feature(econ, econ.objects.GaEcon).features;
-        var cities = topojson.feature(city, city.objects.GeorgiaCities);
+        var georgia = topojson.feature(state, state.objects.ga);
 
-        var cities = map.append('path')
-            .datum(cities)
-            .attr('class', 'cities')
+        var georgia = map.append('path')
+            .datum(state)
+            .attr('class', 'state')
             .attr('d', path);
 
         economics = joinData(economics, csvData);
@@ -63,7 +63,7 @@ function setMap() {
 
         setChart(csvData, colorScale);
         createDropdown(csvData);
-        
+
     }; 
 };//end of function setMap
 
