@@ -41,12 +41,12 @@ function setMap() {
 
     d3.queue()
         .defer(d3.csv, 'data/gaEcon.csv') //load CSV data
-        .defer(d3.json, 'data/GeorgiaEconomics.topojson') //load the city stats json
+        .defer(d3.json, 'data/GeorgiaEconomics.topojson') //load the choropleth json
         .defer(d3.json, 'data/ga.topojson') //load the state of GA json
         .await(callback);
 
     function callback(error, csvData, econ, state) {
-    
+
         var economics = topojson.feature(econ, econ.objects.GaEcon).features;
         var georgia = topojson.feature(state, state.objects.ga);
 
