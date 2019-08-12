@@ -247,15 +247,15 @@ function createDropdown(csvData) {
         .data(attrArray)
         .enter()
         .append('option')
-        .attr('value', function(d){return d;})
-        .text(function(d){return d; });
+        .attr('value', function(d){return d})
+        .text(function(d){return d });
 }; //end of function createDropdown
 
 function changeAttribute(attribute, csvData) {
     expressed = attribute;
     var colorScale = makeColorScale(csvData);
 
-    var economics = d3.selectAll('economics')
+    var economics = d3.selectAll('.economics')
         .transition()
         .duration(1000)
         .style("fill", function(d){
@@ -270,19 +270,7 @@ function changeAttribute(attribute, csvData) {
         .delay(function(d,i){
             return i * 20
         })
-        .duration(500)
-        .attr('x', function(d, i){
-            return i * (chartInnerw /csvData.length) + leftp;
-        })
-        .attr('height', function(d,i){
-            return 463 - yScale(parseFloat(d[expressed]));
-        })
-        .attr('y',function(d,i){
-            return yScale(parseFloat(d[expressed])) + topBottomp;
-        })
-        .style('fill', function(d){
-            return choropleth(d, colorScale);
-        });
+        .duration(500);
 
     updateChart(bars, csvData.length, colorScale);
 }; //end of changeAttribute
@@ -307,7 +295,7 @@ function updateChart(bars, n, colorScale){
 
 function highlight(props){
     var selected = d3.selectAll('.' + props.oid)
-        .style('stroke', 'blue')
+        .style('stroke', '#253494')
         .style('stroke-width', '2');
     
     setLabel(props);
@@ -333,7 +321,7 @@ function dehighlight(props){
         .remove();
 
         return styleObject[styleName];
-    };
+    }; //end of getStyle
 }; //end of dehighlight
 
 function setLabel(props){
