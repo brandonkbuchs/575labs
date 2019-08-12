@@ -40,21 +40,19 @@ function setMap() {
         .projection(projection);
 
     d3.queue()
-        .defer(d3.csv, 'data/gaEcon.csv')
-        .defer(d3.json, 'data/GeorgiaEconomics.topojson')
-        .defer(d3.json, 'data/ga.topojson')
+        .defer(d3.csv, 'data/gaEcon.csv') //load CSV data
+        .defer(d3.json, 'data/GeorgiaEconomics.topojson') //load the city stats json
+        .defer(d3.json, 'data/ga.topojson') //load the state of GA json
         .await(callback);
 
     function callback(error, csvData, econ, state) {
     
-        setGraticule(map, path);
-
         var economics = topojson.feature(econ, econ.objects.GaEcon).features;
         var georgia = topojson.feature(state, state.objects.ga);
 
-        var georgia = map.append('path')
-            .datum(state)
-            .attr('class', 'state')
+        var gaState = map.append('path')
+            .datum(georgia)
+            .attr('class', 'gaState')
             .attr('d', path);
 
         economics = joinData(economics, csvData);
@@ -64,7 +62,7 @@ function setMap() {
 
         setChart(csvData, colorScale);
         createDropdown(csvData);
-        
+        setGraticule(map, path);
 
     }; 
 };//end of function setMap
@@ -138,11 +136,11 @@ function setChart(csvData, colorScale){
 
 function makeColorScale(data){
     var colorClasses = [
-        '#D4B9DA',
-        '#C994C7',
-        '#DF65B0',
-        '#DD1C77',
-        '#980043'
+        '#FDF0F7',
+        '#CBC9E2',
+        '#9E9AC8',
+        '#756BB1',
+        '#54278F'
     ];
 
     var colorScale = d3.scaleQuantile()
@@ -160,7 +158,7 @@ function makeColorScale(data){
 
 function setGraticule(map, path){
     var graticule = d3.geoGraticule()
-        .step([5, 5]);
+        .step([2, 2]);
     
     var gratBackground = map.append('path')
         .datum(graticule.outline())
@@ -200,7 +198,7 @@ function joinData(economics, csvData){
 }; //end of function joinData
 
 function setEnumerationUnits(economics, map, path, colorScale) {
-    var economics = map.selectAll('.economics')
+    var mapRegions = map.selectAll('.economics')
         .data(economics)
         .enter()
         .append('path')
@@ -219,9 +217,9 @@ function setEnumerationUnits(economics, map, path, colorScale) {
         })
         .on('mousemove', moveLabel);
 
-    var desc = economics.append('desc')
+    var desc = mapRegions.append('desc')
         .text('{"stroke":"#000", "stroke-width":"0.5px"}');
-};
+}; //end of function setEnumerationUnits
 
 function choropleth(props, colorScale){
     var val = parseFloat(props[expressed]);
@@ -230,7 +228,7 @@ function choropleth(props, colorScale){
     } else {
         return "#CCC";
     };
-};
+}; //end of function choropleth
 
 function createDropdown(csvData) {
     var dropdown = d3.select('body')
@@ -251,7 +249,7 @@ function createDropdown(csvData) {
         .append('option')
         .attr('value', function(d){return d;})
         .text(function(d){return d; });
-};
+}; //end of function createDropdown
 
 function changeAttribute(attribute, csvData) {
     expressed = attribute;
