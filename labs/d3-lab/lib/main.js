@@ -101,8 +101,8 @@
             })
             .attr('width', chartInnerWidth / csvData.length - 1)
             .on('mouseover', highlight)
-            .on('mouseout', dehighlight);/*
-            .on('mousemove', moveLabel);*/
+            .on('mouseout', dehighlight)
+            .on('mousemove', moveLabel);
 
         //create vertical axis generator
         var yAxis = d3.axisLeft()
@@ -197,8 +197,8 @@
                 })
                 .on('mouseout', function(d){
                     dehighlight(d.properties);
-                });/*
-                .on('mousemove', moveLabel);*/
+                })
+                .on('mousemove', moveLabel);
 
     };
 
@@ -363,7 +363,7 @@
             .attr('class', 'labelname')
             .html(props.geoid);
     };
-    /*
+    
     function moveLabel(){
         //get width of label
         var labelWidth = d3.select('.infoLabel')
@@ -386,6 +386,6 @@
             .style('left', x, + 'px')
             .style('top', y, + 'px');
 
-    };*/
+    };
 
 })();
