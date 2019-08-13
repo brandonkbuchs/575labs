@@ -1,6 +1,6 @@
 .georgia {
-    fill: #FFF;
-    stroke: #CCC;
+    fill: #DADAEB;
+    stroke: #4D004B;
     stroke-width: 2px;
 }
 
@@ -43,7 +43,7 @@
     font-weight: bold;
 }
 
-.chartBg {
+.chartBackground {
     fill: #CCC;
 }
 
